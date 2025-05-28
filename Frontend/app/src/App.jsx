@@ -1,6 +1,6 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import Calculator from './components/Calculator'
+import CalculatorExplanation from './components/CalculatorExplanation'
+import VisualDisplay from './components/VisualDisplay'
 import './App.css'
 
 function App() {
@@ -12,6 +12,7 @@ function App() {
         <h1 className="text-7xl text-gray-400 jersey-20-regular">MagniFlux</h1>
       </div>
     
+<<<<<<< HEAD
       <div className="flex gap-7 justify-center">
 
         <div className="flex flex-col w-[450px] h-[600px] bg-[#14121B] rounded-2xl">
@@ -46,6 +47,12 @@ function App() {
         <div className="w-[700px] h-[600px] bg-[#14121B] rounded-4xl">
           <h1 className='jersey-20-regular text-amber-50'>Text</h1>
         </div>
+=======
+      <div className="flex flex-wrap gap-7 justify-center">
+        <Calculator/>
+        <CalculatorExplanation/>
+        <VisualDisplay/>
+>>>>>>> d42dd64 (add calculator ui)
       </div>
 
     </div>
