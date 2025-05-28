@@ -1,42 +1,77 @@
-#root {
-  max-width: 1280px;
+/* #root {
+  width: auto;
+  height: auto;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 0;
   text-align: center;
+  background: #030304;
+} */
+body{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background: #030304;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.jersey-20-regular{
+  font-family: "Jersey 20", sans-serif;
+  font-weight: 400;
+  font-style: normal;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.custom-input {
+  width: 270px;
+  height: 3rem; /* h-12 = 3rem */
+  outline: 1px solid black;
+  border-radius: 0.5rem; /* rounded-lg = 0.5rem */
+  background-color: #1F1D24;
+  color: white;
+  padding-left: 1rem; /* pl-4 = 1rem */
+  font-family: 'Jersey 20', sans-serif; /* assuming jersey-20-regular maps to this */
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.custom-input::placeholder {
+  color: white;
+  opacity: 0.5; /* Tailwind placeholder-white + placeholder-opacity-100 */
 }
 
-.card {
-  padding: 2em;
+.floating-label-wrapper {
+  position: relative;
+  width: 330px;
 }
 
-.read-the-docs {
-  color: #888;
+.floating-input {
+  width: 100%;
+  height: 3rem;
+  padding: 1.25rem 1rem 0.5rem 1rem; /* Add space at top for label */
+  background-color: #1F1D24;
+  color: white;
+  border: 1px solid black;
+  border-radius: 0.5rem;
+  font-family: 'Jersey 20', sans-serif;
+  outline: none;
+}
+
+.floating-input::placeholder {
+  color: transparent;
+}
+
+.floating-label {
+  position: absolute;
+  /* top: 0.5rem;             */
+  left: 1rem;
+  bottom:1rem;
+  font-size: 1rem;
+  font-family: 'Jersey 20', sans-serif;
+  color: #9ca3af;
+  pointer-events: none;
+  transition: all 0.2s ease;
+}
+
+/* When user types or focuses */
+.floating-input:focus + .floating-label,
+.floating-input:not(:placeholder-shown) + .floating-label {
+  bottom: 2.5rem;
+  font-size: 0.90rem;
+  color: white;
 }
