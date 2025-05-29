@@ -19,6 +19,16 @@ const Calculator  = (props) => {
             alert("Please enter a valid numeric value.")
             return;
         }
+        console.log(angleUnit)
+        if (angleUnit === "Degrees" && (theta < 0 || theta > 360)){
+            alert("Angle(Degrees) is only between 0  to 360")
+            return;
+        }
+
+        if (angleUnit === "Radians" && (theta < 0 || theta > 6.28)){
+            alert("Angle(Radians) is only between 0 to 6.23")
+            return;
+        }
 
         if (angleUnit === "Degrees"){
             theta = theta * (Math.PI/180)
