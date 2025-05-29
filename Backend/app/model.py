@@ -6,6 +6,7 @@ class InputModel(BaseModel):
     magnetic_field: float
     area: float
     theta: float
+    flux: float 
 
 class TextModel(BaseModel):
     text: str
