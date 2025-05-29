@@ -1,9 +1,19 @@
 from fastapi import FastAPI
-from model import InputModel
+from model import InputModel, TextModel
 import math
 from ai import generate_input
-from utils import calculate
+from utils import calculate_flux
+from fastapi.middleware.cors import CORSMiddleware
+
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.get("/")
 async def dummy():
@@ -12,11 +22,12 @@ async def dummy():
 @app.post("/api/")
 async def calculate(model: InputModel):
     dictmodel = model.model_dump()
-    return calculate(dictmodel)
+    return calculate_flux(dictmodel)
 
 
 @app.post("/api/ai/")
-async def text_to_inputs(text:str):
-    input = generate_input(text)
-    return calculate(input)
+async def text_to_inputs(text:TextModel):
+    dict_text = text.model_dump()
+    num = generate_input(dict_text["text"])
+    return calculate_flux(num)
 
