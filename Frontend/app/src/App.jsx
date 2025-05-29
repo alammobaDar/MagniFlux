@@ -1,6 +1,7 @@
 import Calculator from './components/Calculator'
 import CalculatorExplanation from './components/CalculatorExplanation'
 import VisualDisplay from './components/VisualDisplay'
+import WordProblemCalculator from './components/WorldProblemCalculator'
 import './App.css'
 
 function App() {
@@ -50,6 +51,8 @@ function App() {
 =======
       <div className="flex flex-wrap gap-7 justify-center">
         <Calculator/>
+        <WordProblemCalculator/>
+
         <CalculatorExplanation/>
         <VisualDisplay/>
 >>>>>>> d42dd64 (add calculator ui)
