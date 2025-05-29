@@ -1,7 +1,7 @@
 import Calculator from './components/Calculator'
 import CalculatorExplanation from './components/CalculatorExplanation'
 import VisualDisplay from './components/VisualDisplay'
-import WordProblemCalculator from './components/WorldProblemCalculator'
+import WordProblemCalculator from './components/WordProblemCalculator'
 import './App.css'
 import swap from './assets/alter.png'
 import { useState } from 'react'
@@ -13,6 +13,8 @@ function App() {
     const [angle, setAngle] = useState("")
     const [flux, setFlux] = useState(null)
     const [angleUnit, setAngleUnit] = useState("Degrees")
+    const [text, setText] = useState("")
+    const [explain, setExplain] = useState("")
     
 
     const swapPanels = () =>{
@@ -93,13 +95,21 @@ function App() {
                         setFlux={setFlux}
                         angleUnit={angleUnit}
                         setAngleUnit={setAngleUnit}
+                        setExplain={setExplain}
                     />
                 ):(
-                    <WordProblemCalculator/>
+                    <WordProblemCalculator
+                        text={text}
+                        setText={setText}
+                        flux={flux}
+                        setFlux={setFlux}
+                    />
                 )}
 >>>>>>> 3e2757b (add WordProblem Calculator and Functionalities)
 
-                <CalculatorExplanation/>
+                <CalculatorExplanation
+                    explain={explain}
+                />
                 <VisualDisplay/>
             </div>
 

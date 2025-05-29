@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import { useMutation } from "@tanstack/react-query";
 
 const Calculator  = ({
     magneticField,
@@ -11,6 +12,7 @@ const Calculator  = ({
     setFlux,
     angleUnit,
     setAngleUnit,
+    // setExplain
 
 }) => {
 
@@ -26,7 +28,7 @@ const Calculator  = ({
             alert("Please enter a valid natural numeric value.")
             return;
         }
-        console.log(angleUnit)
+        // console.log(angleUnit)
         if (angleUnit === "Degrees" && (theta < 0 || theta > 360)){
             alert("Angle(Degrees) is only between 0  to 360")
             return;
@@ -44,6 +46,33 @@ const Calculator  = ({
         const result = B * A * Math.cos(theta)
         setFlux(result.toFixed(4))
     }
+
+    // const postExplain = useMutation({
+    //     mutationFn: async(newPost) => {
+    //         const response = await fetch("http://127.0.0.1:8000/api/explain/", {
+    //             method: 'POST',
+    //             headers:{'Content-type': 'application/json'},
+    //             body: JSON.stringify(newPost),
+    //         })  
+    //         if (!response.ok){
+    //             throw new Error("Failed to POST")
+    //         }
+    //         return await response.json();
+    //     },
+    //     onSuccess: (data) => {
+    //         setExplain(data)
+    //         console.log("sumakses")
+    //     },
+    //     onError: (error) => {
+    //         alert("Failed to pass the text -> ", error.message)
+    //         console.log("nagem-el")
+    //     }
+    // }) 
+
+    // const handleClick = () =>{
+    //     calculateFlux;
+    //     postExplain;
+    // }
 
     return (
         <div className="flex flex-col w-[430px] h-[600px] bg-[#14121B] rounded-2xl">
