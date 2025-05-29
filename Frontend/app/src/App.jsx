@@ -3,12 +3,19 @@ import CalculatorExplanation from './components/CalculatorExplanation'
 import VisualDisplay from './components/VisualDisplay'
 import WordProblemCalculator from './components/WorldProblemCalculator'
 import './App.css'
+import swap from './assets/alter.png'
+import { useState } from 'react'
 
 function App() {
+    const [show, setShow] = useState(true)
 
-  return (
-    <div className="flex flex-col h-auto p-20">
+    const swapPanels = () =>{
+        setShow((prev) => !prev)
+    }
+    return (
+        <div className="flex flex-col h-auto p-20">
 
+<<<<<<< HEAD
       <div className="m-15">
         <h1 className="text-7xl text-gray-400 jersey-20-regular">MagniFlux</h1>
       </div>
@@ -57,9 +64,30 @@ function App() {
         <VisualDisplay/>
 >>>>>>> d42dd64 (add calculator ui)
       </div>
+=======
+            <div className="m-15">
+                <h1 className="text-7xl text-gray-400 jersey-20-regular">MagniFlux</h1>
+            </div>
 
-    </div>
-  )
-}
+            <div className="flex flex-wrap gap-7 justify-center">
+                
+                <button onClick={swapPanels}>
+                    <img className="w-[50px] h-[50px]" src={swap} alt="swap" />
+                </button>
+                
+                {show ? (
+                    <Calculator/>
+                ):(
+                    <WordProblemCalculator/>
+                )}
+>>>>>>> 3e2757b (add WordProblem Calculator and Functionalities)
+
+                <CalculatorExplanation/>
+                <VisualDisplay/>
+            </div>
+
+        </div>
+    )
+  }
 
 export default App

@@ -15,8 +15,8 @@ const Calculator  = (props) => {
         // console.log(B,A,theta)
         // console.log(Math.PI)
 
-        if (isNaN(B) || isNaN(A) || isNaN(theta)){
-            alert("Please enter a valid numeric value.")
+        if (isNaN(B) || isNaN(A) || isNaN(theta) || B < 0 || A < 0){
+            alert("Please enter a valid natural numeric value.")
             return;
         }
         console.log(angleUnit)
