@@ -1,9 +1,9 @@
 import React, {useState} from "react"
 import { useMutation } from '@tanstack/react-query'
 
-const WordProblemCalculator = (props) => {
-    const[text, setText] = useState("")
-    const[flux, setFlux] = useState(null)
+const WordProblemCalculator = () => {
+    const [text, setText] = useState("")
+    const [flux, setFlux] = useState("")
 
     const postText = useMutation({
         mutationFn: async(newPost) => {
@@ -19,9 +19,11 @@ const WordProblemCalculator = (props) => {
         },
         onSuccess: (data) => {
             setFlux(data)
+            console.log("sumakses")
         },
         onError: (error) => {
             alert("Failed to pass the text -> ", error.message)
+            console.log("nagem-el")
         }
     }) 
 
