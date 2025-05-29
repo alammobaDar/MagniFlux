@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from model import InputModel, TextModel
 import math
-from ai import generate_input
+from ai import generate_input, generate_explanation
 from utils import calculate_flux
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -29,5 +29,11 @@ async def calculate(model: InputModel):
 async def text_to_inputs(text:TextModel):
     dict_text = text.model_dump()
     num = generate_input(dict_text["text"])
-    return calculate_flux(num)
+    return num
+
+@app.post("/api/explain/")
+async def explain(model:dict):
+    dict_model = model.model_dump()
+    explanation = generate_explanation(dict_model)
+    return explanation
 
