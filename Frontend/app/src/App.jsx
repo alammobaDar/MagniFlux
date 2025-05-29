@@ -8,6 +8,12 @@ import { useState } from 'react'
 
 function App() {
     const [show, setShow] = useState(true)
+    const [magneticField, setMagneticField] = useState("")
+    const [area, setArea] = useState("")
+    const [angle, setAngle] = useState("")
+    const [flux, setFlux] = useState(null)
+    const [angleUnit, setAngleUnit] = useState("Degrees")
+    
 
     const swapPanels = () =>{
         setShow((prev) => !prev)
@@ -76,7 +82,18 @@ function App() {
                 </button>
                 
                 {show ? (
-                    <Calculator/>
+                    <Calculator
+                        magneticField={magneticField}
+                        setMagneticField={setMagneticField}
+                        area={area}
+                        setArea={setArea}
+                        angle={angle}
+                        setAngle={setAngle}
+                        flux={flux}
+                        setFlux={setFlux}
+                        angleUnit={angleUnit}
+                        setAngleUnit={setAngleUnit}
+                    />
                 ):(
                     <WordProblemCalculator/>
                 )}

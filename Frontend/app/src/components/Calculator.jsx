@@ -1,12 +1,19 @@
 import React, { useState } from "react"
 
-const Calculator  = (props) => {
-    const [magneticField, setMagneticField] = useState("")
-    const [area, setArea] = useState("")
-    const [angle, setAngle] = useState("")
-    const [flux, setFlux] = useState(null)
-    const [angleUnit, setAngleUnit] = useState("Degrees")
-    
+const Calculator  = ({
+    magneticField,
+    setMagneticField,
+    area,
+    setArea,
+    angle,
+    setAngle,
+    flux,
+    setFlux,
+    angleUnit,
+    setAngleUnit,
+
+}) => {
+
     const calculateFlux = () =>{
         const B = parseFloat(magneticField)
         const A = parseFloat(area)
