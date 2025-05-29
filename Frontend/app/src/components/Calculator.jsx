@@ -43,7 +43,7 @@ const Calculator  = (props) => {
             <div className='m-5 pl-5 flex flex-col'>
                 <label className="jersey-20-regular text-amber-50 text-3xl">Magnetic Flux</label>
                 <div className="flex justify-end items-center w-[350px] h-[130px] pr-3 outline-1 outline-black rounded-lg jersey-20-regular text-amber-50 text-2xl bg-[#1F1D24]">
-                    <h1>{flux}</h1>
+                    <h1>{flux ?? "--"}</h1>
                     <h1 className="pl-2">Φ</h1>
                 </div>
             </div>
