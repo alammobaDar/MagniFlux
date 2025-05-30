@@ -5,12 +5,14 @@ const WordProblemCalculator = ({
     text,
     setText,
     flux,
-    setFlux
+    setFlux,
+    setExplain,
+    setLoading,
 }) => {
     // const [text, setText] = useState("")
     // const [flux, setFlux] = useState("")
 
-    const postText = useMutation({
+    const {mutate} = useMutation({
         mutationFn: async(newPost) => {
             const response = await fetch("http://127.0.0.1:8000/api/ai/", {
                 method: 'POST',
@@ -22,8 +24,12 @@ const WordProblemCalculator = ({
             }
             return await response.json();
         },
+        onMutate: () => setLoading(true),
+        onSettled: () => setLoading(false)
+        ,
         onSuccess: (data) => {
-            setFlux(data)
+            setFlux(data.flux)
+            setExplain(data.explanation)
             console.log("sumakses")
         },
         onError: (error) => {
@@ -32,8 +38,8 @@ const WordProblemCalculator = ({
         }
     }) 
 
-    const toPostText = () =>{
-        postText.mutate({'text':text})
+    const handleClick = () =>{
+        mutate({'text':text})
     }
 
     return (
@@ -52,7 +58,7 @@ const WordProblemCalculator = ({
             </div>
 
             <div className='flex justify-end p-8'>
-                <button onClick={toPostText} className='w-20 h-8 bg-[#1F1D24] text-amber-50 jersey-20-regular' >Calculate</button>
+                <button onClick={handleClick} className='w-20 h-8 bg-[#1F1D24] text-amber-50 jersey-20-regular' >Calculate</button>
             </div>
 
         </div>

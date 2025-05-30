@@ -55,15 +55,6 @@ body{
 
 .floating-label-wrapper {
   position: relative;
-<<<<<<< HEAD
-  width: 330px;
-}
-
-.floating-input {
-  width: 100%;
-  height: 3rem;
-  padding: 1.25rem 1rem 0.5rem 1rem; /* Add space at top for label */
-=======
   width: auto;
   height:60px;
 }
@@ -72,7 +63,6 @@ body{
   /* width: 100%; */
   height: 100%;
   padding: 1rem 1rem 0.5rem 1rem; /* Add space at top for label */
->>>>>>> d42dd64 (add calculator ui)
   background-color: #1F1D24;
   color: white;
   border: 1px solid black;
@@ -89,11 +79,7 @@ body{
   position: absolute;
   /* top: 0.5rem;             */
   left: 1rem;
-<<<<<<< HEAD
-  bottom:1rem;
-=======
   bottom:1.3rem;
->>>>>>> d42dd64 (add calculator ui)
   font-size: 1rem;
   font-family: 'Jersey 20', sans-serif;
   color: #9ca3af;
@@ -104,11 +90,7 @@ body{
 /* When user types or focuses */
 .floating-input:focus + .floating-label,
 .floating-input:not(:placeholder-shown) + .floating-label {
-<<<<<<< HEAD
-  bottom: 2.5rem;
-=======
   bottom: 3.5rem;
->>>>>>> d42dd64 (add calculator ui)
   font-size: 0.90rem;
   color: white;
 }
