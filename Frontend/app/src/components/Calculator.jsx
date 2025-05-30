@@ -12,7 +12,8 @@ const Calculator  = ({
     setFlux,
     angleUnit,
     setAngleUnit,
-    // setExplain
+    setExplain,
+    setLoading,
 
 }) => {
 
@@ -47,32 +48,41 @@ const Calculator  = ({
         setFlux(result.toFixed(4))
     }
 
-    // const postExplain = useMutation({
-    //     mutationFn: async(newPost) => {
-    //         const response = await fetch("http://127.0.0.1:8000/api/explain/", {
-    //             method: 'POST',
-    //             headers:{'Content-type': 'application/json'},
-    //             body: JSON.stringify(newPost),
-    //         })  
-    //         if (!response.ok){
-    //             throw new Error("Failed to POST")
-    //         }
-    //         return await response.json();
-    //     },
-    //     onSuccess: (data) => {
-    //         setExplain(data)
-    //         console.log("sumakses")
-    //     },
-    //     onError: (error) => {
-    //         alert("Failed to pass the text -> ", error.message)
-    //         console.log("nagem-el")
-    //     }
-    // }) 
+    const {mutate} = useMutation({
+        mutationFn: async(newPost) => {
+            const response = await fetch("http://127.0.0.1:8000/api/explain/", {
+                method: 'POST',
+                headers:{'Content-type': 'application/json'},
+                body: JSON.stringify(newPost),
+            })  
+            if (!response.ok){
+                throw new Error("Failed to POST")
+            }
+            return await response.json();
+        },
+        onMutate: () => setLoading(true),
+        onSettled: () => setLoading(false),
+        onSuccess: (data) => {
+            setExplain(data.explanation)
+            console.log("sumakses")
+        },
+        onError: (error) => {
+            alert("Failed to pass the text -> ", error.message)
+            console.log("nagem-el")
+        }
+    }) 
 
-    // const handleClick = () =>{
-    //     calculateFlux;
-    //     postExplain;
-    // }
+    const handleClick = () =>{
+        console.log("click")
+        calculateFlux();
+        mutate({
+            'Tesla': magneticField,
+            'Area': area,
+            'Angle': angle,
+            'angleUnits': angleUnit,
+            'flux':flux
+        });
+    }
 
     return (
         <div className="flex flex-col w-[430px] h-[600px] bg-[#14121B] rounded-2xl">
@@ -108,7 +118,7 @@ const Calculator  = ({
             </div>
 
             <div className='flex justify-end p-8'>
-                <button onClick={calculateFlux} className='w-20 h-8 bg-[#1F1D24] text-amber-50 jersey-20-regular' >Calculate</button>
+                <button onClick={handleClick} className='w-20 h-8 bg-[#1F1D24] text-amber-50 jersey-20-regular' >Calculate</button>
             </div>
 
         </div>

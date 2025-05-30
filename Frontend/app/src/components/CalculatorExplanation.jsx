@@ -13,7 +13,7 @@ const CalculatorExplanation = ({explain}) => {
             <div className="m-11 flex justify-center items-center jersey-20-regular text-2xl text-amber-50 formula">
                 <h1 className="jersey-20-regular text-2xl text-amber-50">{explain}</h1>
             </div>
-        </div>
+        </div> 
     )
 };
 
