@@ -36,9 +36,16 @@ def generate_input(problem:str):
 
                 Note that you should convert the angle to radians if it is a Degree
 
-                if you are given a word problem not related to Magnetic Flux, just say "Not Related"
-                if you are given a word Problem that has a missing needed inputs, just sa "Insufficient Input"
+                if you are given a word problem not related to Magnetic Flux, just answer this, 
                 
+                "flux": "--",
+                "explanation": "Not Related"
+
+                if you are given a word Problem that has a missing needed inputs, just sa "Insufficient Input" in explanation and "--" in flux
+                
+                "flux": "--",
+                "explanation": "Insufficient Inputs"
+
             """ 
         ),
         contents=problem)
@@ -46,6 +53,7 @@ def generate_input(problem:str):
     text = response.text.strip()
     # print(text)
     json_text = extract_json(text)
+    # print(json_text)
     return json_text
 
 # problem = """
@@ -75,12 +83,13 @@ def generate_explanation(input:dict):
 
                 don't add anything other than the format, don't include backticks and python or json on your outputs
                 don't give me an introduction just explain
+
             """ 
         ),
         contents=string)
 
     text = response.text
-    print(text)
+    # print(text)
     json_text = extract_json(text)
     return json_text
 
