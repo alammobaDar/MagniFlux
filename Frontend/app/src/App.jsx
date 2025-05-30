@@ -24,7 +24,11 @@ function App() {
     }
     return (
         <div className="flex flex-col h-auto p-20">
-            {isLoading && <LoadingSpinner/>}
+            {isLoading &&(
+                <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-30 z-50 flex items-center justify-center">
+                    <LoadingSpinner />
+                </div>
+            )}
             <div className="m-15">
                 <h1 className="text-7xl text-gray-400 jersey-20-regular">MagniFlux</h1>
             </div>
