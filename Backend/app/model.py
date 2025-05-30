@@ -3,9 +3,10 @@ from pydantic import BaseModel
 
 
 class InputModel(BaseModel):
-    magnetic_field: float
-    area: float
-    theta: float
+    Tesla: float
+    Area: float
+    Angle: float
+    angleUnits: str
     flux: float 
 
 class TextModel(BaseModel):

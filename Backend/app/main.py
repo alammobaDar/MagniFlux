@@ -26,13 +26,13 @@ async def calculate(model: InputModel):
 
 
 @app.post("/api/ai/")
-async def text_to_inputs(text:TextModel):
+async def insert_word_problem(text:TextModel):
     dict_text = text.model_dump()
     num = generate_input(dict_text["text"])
     return num
 
 @app.post("/api/explain/")
-async def explain(model:dict):
+async def explain(model:InputModel):
     dict_model = model.model_dump()
     explanation = generate_explanation(dict_model)
     return explanation
