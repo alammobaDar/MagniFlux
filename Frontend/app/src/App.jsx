@@ -17,6 +17,7 @@ function App() {
     const [text, setText] = useState("")
     const [explain, setExplain] = useState("")
     const [isLoading, setLoading] = useState(false)
+    const [visual, setVisual] = useState(null)
     
 
     const swapPanels = () =>{
@@ -53,6 +54,7 @@ function App() {
                         setAngleUnit={setAngleUnit}
                         setExplain={setExplain}
                         setLoading={setLoading}
+                        setVisual={setVisual}
                     />
                 ):(
                     <WordProblemCalculator
@@ -62,12 +64,15 @@ function App() {
                         setFlux={setFlux}
                         setExplain={setExplain}
                         setLoading={setLoading}
+                        setVisual={setVisual}
                     />
                 )}
                 <CalculatorExplanation
                     explain={explain}
                 />
-                <VisualDisplay/>
+                <VisualDisplay
+                    visual={visual}
+                />
             </div>
 
         </div>

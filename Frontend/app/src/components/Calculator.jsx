@@ -14,7 +14,7 @@ const Calculator  = ({
     setAngleUnit,
     setExplain,
     setLoading,
-
+    setVisual,
 }) => {
 
     const calculateFlux = () =>{
@@ -43,7 +43,8 @@ const Calculator  = ({
         if (angleUnit === "Degrees"){
             theta = theta * (Math.PI/180)
         }
-
+        
+        console.log(theta)
         const result = B * A * Math.cos(theta)
         setFlux(result.toFixed(4))
     }
@@ -63,12 +64,13 @@ const Calculator  = ({
         onMutate: () => setLoading(true),
         onSettled: () => setLoading(false),
         onSuccess: (data) => {
-            setExplain(data.explanation)
+            setExplain(data.result.explanation)
+            setVisual(data.visual)
             console.log("sumakses")
         },
         onError: (error) => {
             alert("Failed to pass the text -> ", error.message)
-            console.log("nagem-el")
+            console.log("nagem-el", error.message)
         }
     }) 
 
