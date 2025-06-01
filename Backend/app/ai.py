@@ -33,9 +33,12 @@ def generate_input(problem:str):
                 
                 "flux": 0.0200,
                 "explanation": "Your explanation"
+                "inputs": { 'Tesla':<magnetic field value>,
+                            'Area': <Area input>,
+                            'Angle': <Angle input: radians>}
 
                 Note that you should convert the angle to radians if it is a Degree
-
+                if user includes angle in degree form, always convert it into radian form
                 if you are given a word problem not related to Magnetic Flux, just answer this, 
                 
                 "flux": "--",
@@ -80,7 +83,7 @@ def generate_explanation(input:dict):
                 the format of the answer will be in dict format:
                     "explanation": "your explanation"
 
-
+                if you encounter an angle in Degree form, turn it into radians form, include that also on your explanation
                 don't add anything other than the format, don't include backticks and python or json on your outputs
                 don't give me an introduction just explain
 
