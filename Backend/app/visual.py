@@ -1,17 +1,22 @@
 import numpy as np
 import plotly.graph_objects as go
 import math
+import json
+from fastapi.responses import JSONResponse 
 # B for Magnetic field
 # A for Area
 # theta for Angle
 
-def visualize_inputs(B, A, theta):
+def visualize_inputs(B, A, theta, angle_unit = "Radians"):
+    if angle_unit == "Degrees":
+        theta = theta * (np.pi/180)
+
     flux =  B * A * np.cos(theta)
-    print(f"B = {B}")
-    print(f"A = {A}")
-    print(f"theta = {theta}")
-    print(f"cosine = {math.cos(theta)}")
-    print(f"flux = {flux}")
+    # print(f"B = {B}")
+    # print(f"A = {A}")
+    # print(f"theta = {theta}")
+    # print(f"cosine = {math.cos(theta)}")
+    # print(f"flux = {flux}")
 
     x, y = np.meshgrid(np.linspace(-3,3,5), np.linspace(-3,3,5))
     z = np.zeros_like(x)
@@ -41,7 +46,7 @@ def visualize_inputs(B, A, theta):
 
     fig.add_trace(go.Scatter3d(
         x=[0], y=[0], z=[np.max(zz) +1],
-        text = [f"<b>Flux = {flux:.2f} Wb</b>" ],
+        text = [f"<b>Flux = {flux:.4f} Wb</b>" ],
         mode="text",
         showlegend=False
     ))              
@@ -56,7 +61,8 @@ def visualize_inputs(B, A, theta):
         )
     )
 
-    fig.show()
+    # fig_json = json.loads(fig.to_plotly_json())
+    return fig.to_plotly_json()
 
 
-visualize_inputs(B=9, A=60, theta=4.67)
+# visualize_inputs(B=0.8, A=1.2, theta=0.7) 
