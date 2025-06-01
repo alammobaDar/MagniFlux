@@ -8,6 +8,7 @@ const WordProblemCalculator = ({
     setFlux,
     setExplain,
     setLoading,
+    setVisual,
 }) => {
     // const [text, setText] = useState("")
     // const [flux, setFlux] = useState("")
@@ -28,13 +29,14 @@ const WordProblemCalculator = ({
         onSettled: () => setLoading(false)
         ,
         onSuccess: (data) => {
-            setFlux(data.flux)
-            setExplain(data.explanation)
+            setFlux(data.result.flux)
+            setExplain(data.result.explanation)
+            setVisual(data.visual)
             console.log("sumakses")
         },
         onError: (error) => {
             alert("Failed to pass the text -> ", error.message)
-            console.log("nagem-el")
+            console.log("nagem-el", error.message)
         }
     }) 
 
