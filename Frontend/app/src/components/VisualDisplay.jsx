@@ -29,3 +29,4 @@ const VisualDisplay = () => {
 };
 
 export default VisualDisplay;
+  
