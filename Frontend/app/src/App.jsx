@@ -6,22 +6,20 @@ import LoadingSpinner from './components/LoadingSpinner'
 import './App.css'
 import swap from './assets/alter.png'
 import { useState } from 'react'
+import LoadingStore from './stores/useLoadingStore'
+import VisualStore from './stores/useVisualStore'
+import ExplanationStore from './stores/useExplanationStore'
 
 function App() {
     const [show, setShow] = useState(true)
-    const [magneticField, setMagneticField] = useState("")
-    const [area, setArea] = useState("")
-    const [angle, setAngle] = useState("")
-    const [flux, setFlux] = useState(null)
-    const [angleUnit, setAngleUnit] = useState("Degrees")
-    const [text, setText] = useState("")
-    const [explain, setExplain] = useState("")
-    const [isLoading, setLoading] = useState(false)
-    const [visual, setVisual] = useState(null)
+    const {isLoading} = LoadingStore()
+    const {clearExplanation} = ExplanationStore()
+    const {clearVisual} = VisualStore()
     
-
     const swapPanels = () =>{
         setShow((prev) => !prev)
+        clearExplanation()
+        clearVisual()
     }
     return (
         <div className="flex flex-col h-auto p-20">
@@ -41,38 +39,12 @@ function App() {
                 </button>
             
                 {show ? (
-                    <Calculator
-                        magneticField={magneticField}
-                        setMagneticField={setMagneticField}
-                        area={area}
-                        setArea={setArea}
-                        angle={angle}
-                        setAngle={setAngle}
-                        flux={flux}
-                        setFlux={setFlux}
-                        angleUnit={angleUnit}
-                        setAngleUnit={setAngleUnit}
-                        setExplain={setExplain}
-                        setLoading={setLoading}
-                        setVisual={setVisual}
-                    />
+                    <Calculator/>
                 ):(
-                    <WordProblemCalculator
-                        text={text}
-                        setText={setText}
-                        flux={flux}
-                        setFlux={setFlux}
-                        setExplain={setExplain}
-                        setLoading={setLoading}
-                        setVisual={setVisual}
-                    />
+                    <WordProblemCalculator/>
                 )}
-                <CalculatorExplanation
-                    explain={explain}
-                />
-                <VisualDisplay
-                    visual={visual}
-                />
+                <CalculatorExplanation/>
+                <VisualDisplay/>
             </div>
 
         </div>

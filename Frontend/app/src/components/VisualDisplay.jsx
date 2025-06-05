@@ -1,7 +1,10 @@
 import React from "react"
 import Plot from 'react-plotly.js';
+import VisualStore from '../stores/useVisualStore'
 
-const VisualDisplay = ({visual}) => {
+const VisualDisplay = (props) => {
+
+  const {visual} = VisualStore();
   return (
     <div className=" flex items-center justify-center w-[700px] h-[600px] bg-[#14121B] rounded-4xl">
           {visual ? (

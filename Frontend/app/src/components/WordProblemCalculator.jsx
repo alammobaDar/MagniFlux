@@ -1,17 +1,15 @@
 import React, {useState} from "react"
 import { useMutation } from '@tanstack/react-query'
+import VisualStore from '../stores/useVisualStore'
+import ExplanationStore from '../stores/useExplanationStore'
+import LoadingStore from '../stores/useLoadingStore'
 
-const WordProblemCalculator = ({
-    text,
-    setText,
-    flux,
-    setFlux,
-    setExplain,
-    setLoading,
-    setVisual,
-}) => {
-    // const [text, setText] = useState("")
-    // const [flux, setFlux] = useState("")
+const WordProblemCalculator = (props) => {
+    const [text, setText] = useState("")
+    const [flux, setFlux] = useState("")
+    const {setExplanation} = ExplanationStore()
+    const {setVisual} = VisualStore()
+    const {setLoading} = LoadingStore()
 
     const {mutate} = useMutation({
         mutationFn: async(newPost) => {
@@ -30,7 +28,7 @@ const WordProblemCalculator = ({
         ,
         onSuccess: (data) => {
             setFlux(data.result.flux)
-            setExplain(data.result.explanation)
+            setExplanation(data.result.explanation)
             setVisual(data.visual)
             console.log("sumakses")
         },
