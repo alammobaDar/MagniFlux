@@ -3,6 +3,9 @@ import { useMutation } from "@tanstack/react-query";
 import ExplanationStore from '../stores/useExplanationStore'
 import VisualStore from '../stores/useVisualStore'
 import LoadingStore  from '../stores/useLoadingStore'
+import {isValid}from '../utils/validators'
+import {SendInputsForExplanation} from '../utils/utils'
+
 const Calculator  = (props) => {
     const [magneticField, setMagneticField] = useState("")
     const [area, setArea] = useState("")
@@ -19,55 +22,26 @@ const Calculator  = (props) => {
         const A = parseFloat(area)
         let theta = parseFloat(angle)
 
-        // console.log(B,A,theta)
-        // console.log(Math.PI)
-
-        if (isNaN(B) || isNaN(A) || isNaN(theta) || B < 0 || A < 0){
-            alert("Please enter a valid natural numeric value.")
-            return;
-        }
-        // console.log(angleUnit)
-        if (angleUnit === "Degrees" && (theta < 0 || theta > 360)){
-            alert("Angle(Degrees) is only between 0  to 360")
-            return;
-        }
-
-        if (angleUnit === "Radians" && (theta < 0 || theta > 6.28)){
-            alert("Angle(Radians) is only between 0 to 6.23")
-            return;
-        }
-
-        if (angleUnit === "Degrees"){
-            theta = theta * (Math.PI/180)
-        }
-        
-        console.log(theta)
-        const result = B * A * Math.cos(theta)
-        setFlux(result.toFixed(4))
+        if(isValid(B,A,theta,angleUnit)){
+            if (angleUnit === "Degrees"){
+                theta = theta * (Math.PI/180)
+            }
+            // console.log(theta)
+            const result = B * A * Math.cos(theta)
+            setFlux(result.toFixed(4))
+            }
     }
 
     const {mutate} = useMutation({
-        mutationFn: async(newPost) => {
-            const response = await fetch("http://127.0.0.1:8000/api/explain/", {
-                method: 'POST',
-                headers:{'Content-type': 'application/json'},
-                body: JSON.stringify(newPost),
-            })  
-            if (!response.ok){
-                throw new Error("Failed to POST")
-            }
-            return await response.json();
-        },  
+        mutationFn: SendInputsForExplanation,
         onMutate: () => setLoading(true),
         onSettled: () => setLoading(false),
         onSuccess: (data) => {
             setExplanation(data.result.explanation)
             setVisual(data.visual)
-            console.log("sumakses")
         },
         onError: (error) => {
             alert("Failed to pass the text -> ", error.message)
-            console.log("nagem-el", error.message)
         }
     }) 
 
