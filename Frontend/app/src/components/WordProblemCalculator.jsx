@@ -3,26 +3,17 @@ import { useMutation } from '@tanstack/react-query'
 import VisualStore from '../stores/useVisualStore'
 import ExplanationStore from '../stores/useExplanationStore'
 import LoadingStore from '../stores/useLoadingStore'
+import { SendText } from "../utils/utils"
 
 const WordProblemCalculator = (props) => {
     const [text, setText] = useState("")
-    const [flux, setFlux] = useState("")
+    const [flux, setFlux] = useState(null)
     const {setExplanation} = ExplanationStore()
     const {setVisual} = VisualStore()
     const {setLoading} = LoadingStore()
 
     const {mutate} = useMutation({
-        mutationFn: async(newPost) => {
-            const response = await fetch("http://127.0.0.1:8000/api/ai/", {
-                method: 'POST',
-                headers:{'Content-type': 'application/json'},
-                body: JSON.stringify(newPost),
-            })  
-            if (!response.ok){
-                throw new Error("Failed to POST")
-            }
-            return await response.json();
-        },
+        mutationFn: SendText,
         onMutate: () => setLoading(true),
         onSettled: () => setLoading(false)
         ,
@@ -30,11 +21,9 @@ const WordProblemCalculator = (props) => {
             setFlux(data.result.flux)
             setExplanation(data.result.explanation)
             setVisual(data.visual)
-            console.log("sumakses")
         },
         onError: (error) => {
             alert("Failed to pass the text -> ", error.message)
-            console.log("nagem-el", error.message)
         }
     }) 
 
