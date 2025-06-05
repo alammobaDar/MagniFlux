@@ -1,21 +1,17 @@
 import React, { useState } from "react"
 import { useMutation } from "@tanstack/react-query";
-
-const Calculator  = ({
-    magneticField,
-    setMagneticField,
-    area,
-    setArea,
-    angle,
-    setAngle,
-    flux,
-    setFlux,
-    angleUnit,
-    setAngleUnit,
-    setExplain,
-    setLoading,
-    setVisual,
-}) => {
+import ExplanationStore from '../stores/useExplanationStore'
+import VisualStore from '../stores/useVisualStore'
+import LoadingStore  from '../stores/useLoadingStore'
+const Calculator  = (props) => {
+    const [magneticField, setMagneticField] = useState("")
+    const [area, setArea] = useState("")
+    const [angle, setAngle] = useState("")
+    const [angleUnit, setAngleUnit] = useState("Degrees")
+    const [flux, setFlux] = useState(null)
+    const {setExplanation} = ExplanationStore()
+    const {setVisual} = VisualStore()
+    const {setLoading} = LoadingStore()
 
     const calculateFlux = () =>{
         const B = parseFloat(magneticField)
@@ -64,7 +60,7 @@ const Calculator  = ({
         onMutate: () => setLoading(true),
         onSettled: () => setLoading(false),
         onSuccess: (data) => {
-            setExplain(data.result.explanation)
+            setExplanation(data.result.explanation)
             setVisual(data.visual)
             console.log("sumakses")
         },
