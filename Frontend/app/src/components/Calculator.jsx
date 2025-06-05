@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect, useRef } from "react"
 import { useMutation } from "@tanstack/react-query";
 import ExplanationStore from '../stores/useExplanationStore'
 import VisualStore from '../stores/useVisualStore'
@@ -10,8 +10,9 @@ const Calculator  = (props) => {
     const [angleUnit, setAngleUnit] = useState("Degrees")
     const [flux, setFlux] = useState(null)
     const {setExplanation} = ExplanationStore()
-    const {setVisual} = VisualStore()
+    const {setVisual, clearVisual} = VisualStore()
     const {setLoading} = LoadingStore()
+    const [trigger, setTrigger] = useState(false)
 
     const calculateFlux = () =>{
         const B = parseFloat(magneticField)
@@ -56,7 +57,7 @@ const Calculator  = (props) => {
                 throw new Error("Failed to POST")
             }
             return await response.json();
-        },
+        },  
         onMutate: () => setLoading(true),
         onSettled: () => setLoading(false),
         onSuccess: (data) => {
@@ -73,14 +74,21 @@ const Calculator  = (props) => {
     const handleClick = () =>{
         console.log("click")
         calculateFlux();
-        mutate({
-            'Tesla': magneticField,
-            'Area': area,
-            'Angle': angle,
-            'angleUnits': angleUnit,
-            'flux':flux
-        });
+        setTrigger(true)
     }
+
+    useEffect(() => {
+        if (flux != null && trigger){
+            mutate({
+                'Tesla': magneticField,
+                'Area': area,
+                'Angle': angle,
+                'angleUnits': angleUnit,
+                'flux':flux
+            });
+            setTrigger(false)
+        }
+    }, [flux, trigger])
 
     return (
         <div className="flex flex-col w-[430px] h-[600px] bg-[#14121B] rounded-2xl">
