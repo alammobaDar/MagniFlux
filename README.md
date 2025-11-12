@@ -1,5 +1,8 @@
 # 🧲 Magnetic Flux Calculator
 
+## See the app 
+[https://magni-flux.vercel.app/](https://magni-flux.vercel.app/)
+
 ## 🌐 Overview
 **Magnetic Flux Calculator** is an interactive web application that allows users to calculate magnetic flux based on input parameters or solve word problems through AI assistance. Built with **React**, **Tailwind CSS**, **FastAPI**, and integrated with **Google's Gemini AI API**, the app also features rich 3D visualizations using **Plotly**.
 
