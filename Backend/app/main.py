@@ -1,10 +1,10 @@
 from fastapi import FastAPI
-from model import InputModel, TextModel
+from .model import InputModel, TextModel
 import math
-from ai import generate_input, generate_explanation
-from utils import calculate_flux
+from .ai import generate_input, generate_explanation
+from .utils import calculate_flux
 from fastapi.middleware.cors import CORSMiddleware
-from visual import visualize_inputs
+from .visual import visualize_inputs
 
 app = FastAPI()
 
