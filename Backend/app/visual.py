@@ -58,7 +58,8 @@ def visualize_inputs(B, A, theta, angle_unit = "Radians"):
             yaxis_title="Y",
             zaxis_title="Z",
             aspectratio=dict(x=1, y=1,z=1)
-        )
+        ),
+        template="plotly_dark"
     )
 
     # fig_json = json.loads(fig.to_plotly_json())

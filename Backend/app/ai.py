@@ -23,29 +23,34 @@ def generate_input(problem:str):
     response = client.models.generate_content(
         model="gemini-2.0-flash",
         config=types.GenerateContentConfig(
-            system_instruction="""You are a physics teacher,and expertise in Magnetic Flux.
-                i will give you a word problem, and answer it, don't add symbols just give me the output of the magnetic flux. after that, explain, brief as possible
+            system_instruction="""
+                You are a physics teacher with expertise in Magnetic Flux.
 
-                the format of your answer will be like this:
-                
-                "flux": 0.0200,
-                "explanation": "Your explanation"
-                "inputs": { 'Tesla':<magnetic field value>,
-                            'Area': <Area input>,
-                            'Angle': <Angle input: radians>}
+                You will be given a word problem. Solve it only if it relates to magnetic flux using this formula: Φ = B ⋅ A ⋅ cos(θ)
 
-                Note that you should convert the angle to radians if it is a Degree
-                if user includes angle in degree form, always convert it into radian form
-                if you are given a word problem not related to Magnetic Flux, just answer this, 
-                
-                "flux": "--",
-                "explanation": "Not Related"
+                Always follow this output format exactly:
 
-                if you are given a word Problem that has a missing needed inputs, just sa "Insufficient Input" in explanation and "--" in flux
-                
-                "flux": "--",
-                "explanation": "Insufficient Inputs"
+                "flux": <numeric or "--">,
+                "explanation": "<brief explanation here>",
+                "inputs": {
+                    "Tesla": <magnetic field in Tesla>,
+                    "Area": <area in square meters>,
+                    "Angle": <angle in radians>
+                }
 
+                Rules:
+                - Only use the formula: Φ = B ⋅ A ⋅ cos(θ)
+                - If angle is in degrees, convert it to radians using θ (rad) = degrees × π / 180
+                - If the problem is not related to magnetic flux, return:
+                  "flux": "--",
+                  "explanation": "Not Related",
+                  "inputs": { "Tesla": "--", "Area": "--", "Angle": "--" }
+                - If any required value (B, A, or θ) is missing or cannot be derived, return:
+                  "flux": "--",
+                  "explanation": "Insufficient Inputs",
+                  "inputs": { "Tesla": "--", "Area": "--", "Angle": "--" }
+
+                Clarify assumptions briefly, but keep the explanation short and accurate.
             """ 
         ),
         contents=problem)
@@ -58,7 +63,7 @@ def generate_explanation(input:dict):
     client = genai.Client(api_key=os.getenv("GEMINI_KEY"))
 
     string = f"""
-        the area is {input['Area']} m², the tesla or magnetic field is {input['Tesla']} Tesla.
+        the area is {input['Area']} A science student is conducting an experiment using a flat rectangular coil of wire with an area of 0.8 m². The coil is placed in a uniform magnetic field of strength 1.5 T. The magnetic field makes an angle of 30° with the normal (perpendicular) to the surface of the coil.m², the tesla or magnetic field is {input['Tesla']} Tesla.
         The angle is {input['Angle']} {input['angleUnits']}.
         The resulting magnetic flux is {input['flux']} Wb.
     """
