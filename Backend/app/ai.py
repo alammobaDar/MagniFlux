@@ -63,7 +63,7 @@ def generate_explanation(input:dict):
     client = genai.Client(api_key=os.getenv("GEMINI_KEY"))
 
     string = f"""
-        the area is {input['Area']} m², the tesla or magnetic field is {input['Tesla']} Tesla.
+        the area is {input['Area']} A science student is conducting an experiment using a flat rectangular coil of wire with an area of 0.8 m². The coil is placed in a uniform magnetic field of strength 1.5 T. The magnetic field makes an angle of 30° with the normal (perpendicular) to the surface of the coil.m², the tesla or magnetic field is {input['Tesla']} Tesla.
         The angle is {input['Angle']} {input['angleUnits']}.
         The resulting magnetic flux is {input['flux']} Wb.
     """

@@ -6,6 +6,8 @@
   text-align: center;
   background: #030304;
 } */
+
+
 body{
   margin: 0;
   padding: 0;
@@ -97,4 +99,12 @@ body{
 
 .formula span.katex-html{
   display: none;
+}
+
+
+.background_image{
+  background-image: url('app/src/assets/background.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100vh; /* Adjust as needed */
 }
